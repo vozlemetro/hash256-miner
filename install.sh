@@ -50,7 +50,7 @@ else
     wget -q https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.1-1_all.deb -O /tmp/cuda-keyring.deb
     sudo dpkg -i /tmp/cuda-keyring.deb
     sudo apt-get update -qq
-    sudo apt-get install -y -qq cuda-toolkit-12-6
+    sudo apt-get install -y -qq cuda-nvcc-12-6 cuda-cudart-dev-12-6 cuda-crt-12-6
     export PATH=/usr/local/cuda/bin:$PATH
     if ! grep -q 'cuda/bin' ~/.bashrc 2>/dev/null; then
         echo 'export PATH=/usr/local/cuda/bin:$PATH' >> ~/.bashrc
@@ -61,7 +61,7 @@ fi
 # Step 2: Install build dependencies
 log "Installing build dependencies..."
 sudo apt-get update -qq
-sudo apt-get install -y -qq cmake build-essential libcurl4-openssl-dev libsecp256k1-dev git
+sudo apt-get install -y -qq cmake build-essential libcurl4-openssl-dev libsecp256k1-dev git curl
 
 # Step 3: Clone or update repo
 INSTALL_DIR="$HOME/hash256-miner"

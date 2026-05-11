@@ -42,7 +42,7 @@ I wrote this for myself and decided to share it — I want to grow the total net
 ```powershell
 wsl --install -d Ubuntu-22.04
 ```
-2. Restart PC, open **Ubuntu-22.04**, then run **one command**:
+2. Restart PC, open **Ubuntu-22.04** from the Start menu (or run `wsl -d Ubuntu-22.04` in PowerShell), then run **one command**:
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/vozlemetro/hash256-miner/main/install.sh)
 ```
@@ -53,6 +53,10 @@ This installs CUDA, dependencies, clones and builds the miner automatically.
 cd ~/hash256-miner/build
 ./hash256_cuda --privkey YOUR_KEY --rpc https://ethereum-rpc.publicnode.com --grid-size 8192
 ```
+
+> **Important**: Always open specifically **Ubuntu-22.04**, not the default "Ubuntu" app. If you have multiple WSL distros, use `wsl -d Ubuntu-22.04` in PowerShell.
+
+> **If install hangs or fails**: disable VPN. CUDA downloads from NVIDIA servers and VPN can block or slow them down. CUDA packages are ~200 MB total — it may take a few minutes depending on your internet speed.
 
 That's it! Skip to [Recommended Settings by GPU](#recommended-settings-by-gpu) for your `--grid-size`.
 
@@ -73,7 +77,7 @@ Restart your PC, then open **Ubuntu-22.04** from the Start menu. Set up a userna
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.1-1_all.deb
 sudo dpkg -i cuda-keyring_1.1-1_all.deb
 sudo apt update
-sudo apt install -y cuda-toolkit-12-6 cmake build-essential libcurl4-openssl-dev libsecp256k1-dev
+sudo apt install -y cuda-nvcc-12-6 cuda-cudart-dev-12-6 cuda-crt-12-6 cmake build-essential libcurl4-openssl-dev libsecp256k1-dev
 ```
 
 Add CUDA to PATH (add this to your `~/.bashrc`):
@@ -210,7 +214,7 @@ GPU-майнер для [**HASH**](https://hash256.fun) — первого на�
 ```powershell
 wsl --install -d Ubuntu-22.04
 ```
-2. Перезагрузите ПК, откройте **Ubuntu-22.04**, запустите **одну команду**:
+2. Перезагрузите ПК, откройте **Ubuntu-22.04** из меню Пуск (или `wsl -d Ubuntu-22.04` в PowerShell), запустите **одну команду**:
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/vozlemetro/hash256-miner/main/install.sh)
 ```
@@ -221,6 +225,10 @@ bash <(curl -s https://raw.githubusercontent.com/vozlemetro/hash256-miner/main/i
 cd ~/hash256-miner/build
 ./hash256_cuda --privkey ВАШ_КЛЮЧ --rpc https://ethereum-rpc.publicnode.com --grid-size 8192
 ```
+
+> **Важно**: Всегда открывайте именно **Ubuntu-22.04**, а не просто "Ubuntu". Если у вас несколько дистрибутивов WSL, запускайте через PowerShell: `wsl -d Ubuntu-22.04`.
+
+> **Если установка зависает или не грузит**: отключите VPN. CUDA качается с серверов NVIDIA и VPN может блокировать или тормозить загрузку. Пакеты CUDA весят ~200 МБ — установка занимает пару минут.
 
 Готово! Смотрите таблицу ниже для `--grid-size` под вашу видеокарту.
 
@@ -242,7 +250,7 @@ wsl --install -d Ubuntu-22.04
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.1-1_all.deb
 sudo dpkg -i cuda-keyring_1.1-1_all.deb
 sudo apt update
-sudo apt install -y cuda-toolkit-12-6 cmake build-essential libcurl4-openssl-dev libsecp256k1-dev
+sudo apt install -y cuda-nvcc-12-6 cuda-cudart-dev-12-6 cuda-crt-12-6 cmake build-essential libcurl4-openssl-dev libsecp256k1-dev
 echo 'export PATH=/usr/local/cuda/bin:$PATH' >> ~/.bashrc
 source ~/.bashrc
 ```
